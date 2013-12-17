@@ -26,7 +26,6 @@ Gem::Specification.new do |s|
     "VERSION",
     "lib/rgigya.rb",
     "lib/rgigya/base.rb",
-    "lib/rgigya/hash.rb",
     "lib/rgigya/sig_utils.rb",
     "rgigya.gemspec",
     "spec/helpers.rb",

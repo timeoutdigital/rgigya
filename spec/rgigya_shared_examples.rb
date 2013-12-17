@@ -83,8 +83,8 @@ shared_examples_for RGigya do
     it "should fill in the required parameters on request" do
       # we pass in the "_" replaced with "." already
       params = RGigya.required_parameters
-      params.should match(/apiKey=#{Regexp.escape(CGI.escape(GIGYA_API_KEY))}/)
-      params.should match(/secret=#{Regexp.escape(CGI.escape(GIGYA_API_SECRET))}/)
+      params.should match(/apiKey=#{Regexp.escape(Rack::Utils.escape(GIGYA_API_KEY))}/)
+      params.should match(/secret=#{Regexp.escape(Rack::Utils.escape(GIGYA_API_SECRET))}/)
       params.should match(/format=json/)    
     end
     
