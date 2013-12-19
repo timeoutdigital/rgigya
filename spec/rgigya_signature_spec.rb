@@ -33,6 +33,16 @@ describe "RGigyaSignature" do
     
   end
   
+  it "should not verify signature if signature is too old" do
+    now = Time.now.to_i
+    ## generate correctly signed, but expired, UID and signature
+    response = { 'UID' => '12121212', 'signatureTimestamp' => now - 300}
+    base = "#{response['signatureTimestamp']}_#{response['UID']}"
+    response['UIDSignature'] = RGigya::SigUtils.calculate_signature(base, GIGYA_API_KEY)
+
+    RGigya::SigUtils::validate_user_signature(response['UID'], response['signatureTimestamp'], response['UIDSignature']).should be_false
+  end
+ 
   # Note:  I stub everything here including the signature so this test really isn't valid
   # But, it explains how it works
   it "should verify friends signature after successful api call" do    

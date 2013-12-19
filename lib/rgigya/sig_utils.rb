@@ -25,6 +25,7 @@ module RGigya
       #
       # @author Scott Sampson
   	  def validate_user_signature(uid, timestamp, signature)
+        return false if (Time.now.utc.to_i - 180) > timestamp
   	    base = "#{timestamp}_#{uid}"
   	  	expected_signature = calculate_signature(base, @@api_secret)
     		return expected_signature == signature
